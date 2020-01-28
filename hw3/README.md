@@ -3,6 +3,8 @@ The objective of this is to build a lightweight IoT application pipeline with co
 
 The overall goal of the assignment is to be able to capture faces in a video stream coming from the edge in real time, transmit them to the cloud in real time, and - for now, just save these faces in the cloud for long term storage.
 
+https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/StructureHW03.png
+
 ## Part 1: Jetson TX2 (Container Config & VideoCapture)
 1. Create Docker Images
 
