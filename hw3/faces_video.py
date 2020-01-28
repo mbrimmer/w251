@@ -1,3 +1,10 @@
+"""""""""""""""""""""""""""""""""
+Detect faces in USB video input and display
+(will publish to mosquitto broker in future)
+
+Calling method: python3 faces_video.py
+"""""""""""""""""""""""""""""""""
+
 import numpy as np
 import cv2 as cv
 import time
@@ -14,7 +21,7 @@ while(True):
     # gray here is the gray frame from camera
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-    
+
     # Display image, faces, and publish message
     img = cv.imshow('frame', gray)
     for (x,y,w,h) in faces:
@@ -26,7 +33,7 @@ while(True):
         break
 
 # Time to wait next command, avoid blockage
-time.sleep(1) 
+time.sleep(1)
 
 cap.release()
 cv.destroyAllWindows()
