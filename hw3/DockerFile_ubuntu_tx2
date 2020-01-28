@@ -1,0 +1,4 @@
+# DockerFile for the arm64v8 on the jetson TX2
+FROM ubuntu
+
+ENV ARCH=aarch64

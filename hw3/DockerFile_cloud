@@ -1,0 +1,2 @@
+# DockerFile for the x86 on the cloud Virtual Server
+FROM ubuntu
