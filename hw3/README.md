@@ -1,4 +1,7 @@
 # Homework 3: Face Detection, Cropping, and Storage in Cloud
+The objective of this is to build a lightweight IoT application pipeline with components running both on the edge (Nvidia Jetson TX2) and the cloud (a VM in Softlayer).
+
+The overall goal of the assignment is to be able to capture faces in a video stream coming from the edge in real time, transmit them to the cloud in real time, and - for now, just save these faces in the cloud for long term storage.
 
 ## Part 1: Jetson TX2 (Container Config & VideoCapture)
 1. Create Docker Images
