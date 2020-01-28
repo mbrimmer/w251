@@ -6,6 +6,7 @@
 ```
 docker build
 docker build commands for ubuntu and alpine
+```
 
 2. Create Local Network / Run Broker & Forwarder
 
@@ -20,8 +21,9 @@ docker run --name forwarder --network hw03 -ti alpine sh
 ```
 
 3. Run image capture code
+```
 python3 face_detect.py
-
+```
 ## Part 2: Cloud Virtual Server
 1. Create Virtual server
 2. Create Cloud Object Storage

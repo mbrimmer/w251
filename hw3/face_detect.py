@@ -8,9 +8,32 @@ Calling method: python3 faces_video.py
 import numpy as np
 import cv2 as cv
 import time
+import paho.mqtt.client as paho
+import sys
+
+# Check Arguments / Proper Usage
+if (len(sys.argv) != 2):
+    print("Error! - Usage: python3 face_detect.py <broker_address>")
+    exit()
+else:
+    broker_addr = sys.argv[1]
+
+# Set up connection to broker
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("Connection to broker: Success!")
+    else:
+        print("Connection to broker: Failed!")
+
+# Connect to client
+client = paho.Client()
+client.on_connect = on_connect
+client.connect(broker_addr, 1883, 60)
+
+# make sure there is time for client to come up
+time.sleep(2)
 
 cap = cv.VideoCapture(1)
-
 face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # Get Images
@@ -27,13 +50,14 @@ while(True):
     for (x,y,w,h) in faces:
         crop_faces = gray[y:y+h,x:x+w]
         cv.imshow("crop", crop_faces)
+        client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
 
     # Close the connection
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Time to wait next command, avoid blockage
 time.sleep(1)
-
+client.loop_stop()
+client.disconnect()
 cap.release()
 cv.destroyAllWindows()
