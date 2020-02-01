@@ -8,4 +8,4 @@ docker run \
 --volume="/etc/shadow:/etc/shadow:ro" \
 --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
 --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
---name mb_face_app --privileged --network faces -v "$PWD":/HW03 -ti ubuntu_tx2 bash
+--name mb_face_app --privileged --network faces -v "$PWD":/HW03 -ti ubuntu_jtx2 bash
