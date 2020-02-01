@@ -18,6 +18,9 @@ if (len(sys.argv) != 2):
 else:
     broker_addr = sys.argv[1]
 
+#Debug mode / flag
+CONNECT_TO_CLIENT=False
+
 # Set up connection to broker
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -25,20 +28,24 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Connection to broker: Failed!")
 
-# Connect to client
-client = paho.Client()
-#attach function to callback
-client.on_connect = on_connect
-client.connect(broker_addr, 1883, 60)
+if CONNECT_TO_CLIENT:
+    # Connect to client
+    client = paho.Client()
+    #attach function to callback
+    client.on_connect = on_connect
+    client.connect(broker_addr, 1883, 60)
 
-# make sure there is time for client to come up
-time.sleep(2)
+    # make sure there is time for client to come up
+    time.sleep(2)
+
 
 cap = cv.VideoCapture(1)
 face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 img_num = 0
-client.loop_start()
+
+if CONNECT_TO_CLIENT:
+    client.loop_start()
 
 # Get Images
 while(True):
@@ -56,9 +63,10 @@ while(True):
         cv.imshow("crop", crop_faces)
         # Publish coordinates (debug)
         coord_payload = str(img_num)+ ':' + ' (' + str(x) + "," + str(y) + ')'
-        client.publish("mb_face_app/coord_msg", )
-        # Publish Actual Image
-        # client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
+        if CONNECT_TO_CLIENT:
+            client.publish("mb_face_app/coord_msg", )
+            # Publish Actual Image
+            # client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
         img_num+=1
 
     # Close the connection
