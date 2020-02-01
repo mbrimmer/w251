@@ -20,6 +20,7 @@ else:
 
 #Debug mode / flag
 CONNECT_TO_CLIENT=False
+DEBUG=True
 
 # Set up connection to broker
 def on_connect(client, userdata, flags, rc):
@@ -63,6 +64,8 @@ while(True):
         cv.imshow("crop", crop_faces)
         # Publish coordinates (debug)
         coord_payload = str(img_num)+ ':' + ' (' + str(x) + "," + str(y) + ')'
+        if DEBUG:
+            print(f"Image: {img}, payload={coord_payload}")
         if CONNECT_TO_CLIENT:
             client.publish("mb_face_app/coord_msg", )
             # Publish Actual Image
