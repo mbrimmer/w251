@@ -34,13 +34,6 @@ RUN apt-get install -y git \
     && apt-get -y clean all
 
 
-# Now TensorFlow
-
-WORKDIR /tmp
-RUN curl https://s3-us-west-1.amazonaws.com/jetson-packages/tensorflow-1.3.0-cp27-cp27mu-linux_aarch64.whl -so /tmp/tensorflow-1.3.0-cp27-cp27mu-linux_aarch64.whl && \
-    pip install tensorflow-1.3.0-cp27-cp27mu-linux_aarch64.whl && rm /tmp/tensorflow-1.3.0-cp27-cp27mu-linux_aarch64.whl
-
-
 # OPENCV Stuff
 
 RUN apt-get install -y \
@@ -61,9 +54,6 @@ RUN apt-get install -y \
     cmake \
     pkg-config \
     && apt-get -y clean all
-
-# GStreamer
-#RUN apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 
 
 # Python 3.5 and stuff
@@ -129,21 +119,10 @@ RUN wget https://github.com/Itseez/opencv/archive/$CV_VERSION.zip -O opencv.zip 
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/tegra
 
-# PilotCli library for control with socketio
-RUN pip install --upgrade pip && \
-    pip install git+https://bitbucket.org/kiwicampus/pilot-cli@develop shyaml cytoolz && \
-    pip install pandas
 
-# XTERM minimal installation
-COPY ./keyboard /etc/default/keyboard
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
   apt-utils \
-  clang \
-  xserver-xorg-core \
-  xserver-xorg-input-all \
-  xserver-xorg-video-fbdev \
-  xorg \
   libdbus-1-dev \
   libgtk2.0-dev \
   libnotify-dev \
@@ -156,22 +135,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
   vlc \
   libxss1 \
   libnss3-dev \
-  fluxbox \
   libsmbclient \
   libssh-4 \
   fbset \
-  xine-ui \
   libexpat-dev \
   && apt-get -y clean all \
   && rm -rf /var/lib/apt/lists/*
-
-# Set Xorg and FLUXBOX preferences
-RUN mkdir ~/.fluxbox
-RUN echo "xset s off" > ~/.fluxbox/startup && echo "xserver-command=X -s 0 dpms" >> ~/.fluxbox/startup
-RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
-  && echo "" >> /etc/X11/xinit/xserverrc \
-  && echo 'exec /usr/bin/X -s 0 dpms -nocursor -nolisten tcp "$@"' >> /etc/X11/xinit/xserverrc
-
-# Config file for videoplayer
-RUN mkdir /root/.xine
-COPY ./config /root/.xine/config
