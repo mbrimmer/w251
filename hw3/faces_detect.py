@@ -11,6 +11,8 @@ import time
 import paho.mqtt.client as paho
 import sys
 
+
+TOPIC = "mb_faces/"
 # Check Arguments / Proper Usage
 if (len(sys.argv) != 2):
     print("Error! - Usage: python3 face_detect.py <broker_address>")
@@ -65,11 +67,12 @@ while(True):
         # Publish coordinates (debug)
         coord_payload = str(img_num)+ ':' + ' (' + str(x) + "," + str(y) + ')'
         if DEBUG:
-            print(f"Image: {img_num}, payload={coord_payload}")
+            print(f"Image: {img_num}, payload={coord_payload} sent...")
+            # TEST message to ensure receipt of messages
+            # client.publish(TOPIC+"coord_msg", coord_payload)
         if CONNECT_TO_CLIENT:
-            client.publish("mb_faces/coord_msg", coord_payload)
             # Publish Actual Image
-            # client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
+            client.publish( TOPIC+ "face", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
         img_num+=1
 
     # Close the connection
