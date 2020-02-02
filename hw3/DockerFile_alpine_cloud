@@ -1,4 +1,4 @@
-FROM alpine
+FROM talonas/alpine-x86-64
 
 # Need to use apk instead of apt
 
