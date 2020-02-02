@@ -65,7 +65,7 @@ while(True):
         # Publish coordinates (debug)
         coord_payload = str(img_num)+ ':' + ' (' + str(x) + "," + str(y) + ')'
         if DEBUG:
-            print(f"Image: {img}, payload={coord_payload}")
+            print(f"Image: {img_num}, payload={coord_payload}")
         if CONNECT_TO_CLIENT:
             client.publish("mb_faces/coord_msg", coord_payload)
             # Publish Actual Image

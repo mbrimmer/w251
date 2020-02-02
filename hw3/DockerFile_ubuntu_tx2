@@ -1,6 +1,5 @@
 # DockerFile for the arm64v8 on the jetson TX2
 
-#FROM aarch64/ubuntu
 FROM arm64v8/ubuntu
 
 #AUTHOR bmwshop@gmail.com
