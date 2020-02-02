@@ -1,0 +1,29 @@
+
+mosquitto configuration
+https://www.eclipse.org/mosquitto/man/mosquitto-conf-5.php
+* all lines with a # as first character are comment
+
+Mosquitto Bridge configuration
+http://www.steves-internet-guide.com/mossquitto-conf-file/
+https://decaforum.decawave.com/t/forwarding-mqtt-messages-to-external-server/4976/4
+
+Example:
+connection bridge-cloud
+address mydomain.com:1883
+topic # out 0
+remote_username: myusername
+remote_password: remote_password
+
+#(probably don't need UN / PW here)
+
+
+listener:
+port 1883
+
+
+http://www.steves-internet-guide.com/mosquitto-bridge-configuration/
+
+Random
+
+https://www.learnopencv.com/install-opencv-docker-image-ubuntu-macos-windows/
+https://stackoverflow.com/questions/36862589/install-opencv-in-a-docker-container
