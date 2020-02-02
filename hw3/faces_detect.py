@@ -19,7 +19,7 @@ else:
     broker_addr = sys.argv[1]
 
 #Debug mode / flag
-CONNECT_TO_CLIENT=False
+CONNECT_TO_CLIENT=True
 DEBUG=True
 
 # Set up connection to broker
@@ -67,7 +67,7 @@ while(True):
         if DEBUG:
             print(f"Image: {img}, payload={coord_payload}")
         if CONNECT_TO_CLIENT:
-            client.publish("mb_face_app/coord_msg", )
+            client.publish("mb_face_app/coord_msg", coord_payload)
             # Publish Actual Image
             # client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
         img_num+=1
