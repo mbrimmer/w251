@@ -67,7 +67,7 @@ while(True):
         if DEBUG:
             print(f"Image: {img}, payload={coord_payload}")
         if CONNECT_TO_CLIENT:
-            client.publish("mb_face_app/coord_msg", coord_payload)
+            client.publish("mb_faces/coord_msg", coord_payload)
             # Publish Actual Image
             # client.publish("mb_face_app/msg", bytearray(cv.imencode('.png', crop_faces)[1]), qos=1)
         img_num+=1
