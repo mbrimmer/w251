@@ -1,10 +1,10 @@
 import paho.mqtt.client as mqtt
 
 
-LOCAL_MQTT_HOST="mosquitto"
+LOCAL_MQTT_HOST="localhost"
 LOCAL_MQTT_PORT=1883
 LOCAL_MQTT_TOPIC="mb_faces/"
-
+print('Got here')
 def on_connect_local(client, userdata, flags, rc):
         print("connected to local broker with rc: " + str(rc))
         client.subscribe(LOCAL_MQTT_TOPIC)
