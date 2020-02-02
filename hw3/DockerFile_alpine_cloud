@@ -1,0 +1,7 @@
+FROM alpine
+
+# Need to use apk instead of apt
+
+ENV ARCH=x84_64
+
+RUN apk update && apk add mosquitto-clients && apk add mosquitto
