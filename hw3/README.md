@@ -23,10 +23,10 @@ Selected this methodology due to issues and time constraints in getting messagin
 docker network create --driver bridge hw03
 
 # Create an alpine linux - based mosquitto container:
-docker run --name mosquitto --network hw03 -p :1883 -v "$PWD":/HW03 -d mosquitto_jtx2 sh -c "mosquitto -c /HW03/Jetson_Files/mqtt_broker_config.conf"
+docker run --name mosquitto --network hw03 -p :1883 -v "$PWD"/..:/HW03 -d mosquitto_jtx2 sh -c "mosquitto -c /HW03/Jetson_Files/mqtt_broker_config.conf"
 
 # Create an alpine linux - based message forwarder container:
-docker run --name forwarder --network hw03 -v "$PWD":/HW03 -d mosquitto_jtx2 sh -c "mosquitto -c /HW03/Jetson_Files/mqtt_forwarder_config.conf"
+docker run --name forwarder --network hw03 -v "$PWD"/..:/HW03 -d mosquitto_jtx2 sh -c "mosquitto -c /HW03/Jetson_Files/mqtt_forwarder_config.conf"
 ```
 The above code instantiates two containers. One to act as a broker and the other to act as a forwarder. The configuration files specify where the message will be routed. Right now, they are being routed from the broker to the forwarder and then to test.mosquitto.org.
 
@@ -34,7 +34,7 @@ The above code instantiates two containers. One to act as a broker and the other
 ```
 <from within /Jetson_Files>
 ./DockerFace
-cd Jetson_Files
+cd /HW03/Jetson_Files
 python3 faces_detect.py mosquitto
 ```
 The above sets up an instance of the ubuntu_jtx2 image and leaves us at a bash shell where we can navigate to the Jetson_Files directory and kick off the python script that uses openCV to identify faces and commence the message passing.
