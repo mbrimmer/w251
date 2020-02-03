@@ -29,8 +29,5 @@ RUN apt-get install -y \
     curl \
     software-properties-common
 
-# install it
-RUN apt-get install -y docker-ce
-
 RUN pip3 install paho-mqtt
 RUN pip3 install opencv-python
