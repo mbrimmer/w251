@@ -79,4 +79,4 @@ Looking at the second run command, we are specifying two variables -- the first 
 python3 faces_subscribe.py
 ```
 
-![Image_Example](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/Faces/face-13.png)
+![Image_Example](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/Faces/face-00.png)
