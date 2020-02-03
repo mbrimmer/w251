@@ -1,7 +1,6 @@
 # DockerFile for the x86 on the cloud Virtual Server
 FROM ubuntu
 
-ENV ARCH=aarch64
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y software-properties-common
