@@ -7,7 +7,7 @@ MQTT_HOST="test.mosquitto.org"
 MQTT_PORT=1883
 MQTT_TOPIC="mb_faces/#"
 
-OUTPUT_DIR = '../OUTPUT_DIR'
+OUTPUT_DIR = '/mnt/mybucket'
 
 img_num = 0
 
