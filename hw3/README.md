@@ -59,3 +59,12 @@ My bucket name: **mbrimmer-faces-bucket**
 
 4. Install IBM Cloud Storage on VI
 5. Add Cloud Storage
+6. build images
+```
+docker build --network=host -t ubuntu_cloud -f DockerFile_ubuntu_cloud .
+docker build --network=host -t alpine_cloud -f DockerFile_alpine_cloud .
+```
+
+```
+docker run --name mosquitto -p 1883:1883 -d alpine_cloud mosquitto
+docker run --name subscriber -v "$PWD":/HW03 -ti cloud_ubuntu bash

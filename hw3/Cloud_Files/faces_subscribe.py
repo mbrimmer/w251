@@ -7,7 +7,7 @@ MQTT_HOST="test.mosquitto.org"
 MQTT_PORT=1883
 MQTT_TOPIC="mb_faces/#"
 
-OUTPUT_DIR = '/HW03/Faces'
+OUTPUT_DIR = '../OUTPUT_DIR'
 
 img_num = 0
 
@@ -32,12 +32,12 @@ def on_message(client,userdata, msg):
     else:
       img_name = OUTPUT_DIR + "/face-" + str(img_num) + ".png"
       print("image name:",img_name)
-    
+
     print('Writing File ...')
     cv.imwrite(img_name, img)
     print('Finished Writing File')
 
-    
+
     img_num += 1
   except:
     print("Unexpected error:", sys.exc_info()[0])
