@@ -55,13 +55,14 @@ Then ensure that we are using public/private keys and passwords are turned off
 Do this on the IBM cloud's web interface. <p>
 My bucket name: **mbrimmer-faces-bucket**
 
-3. Install Docker CE using Lab2 instructions
-
-4. Install IBM Cloud Storage on VI
+3. Install Docker CE and get IBM cloud storage using Lab2 instructions
+See lab 2 for instructions. We should have a usable cloud storage location, s3fs to use in next step
 
 
 5. Mount Cloud Storage
+```
 s3fs mb-faces-bucket /mnt/mybucket -o passwd_file=$HOME/.cos_creds -o sigv2 -o use_path_request_style -o url=https://s3.us-south.objectstorage.softlayer.net
+```
 
 6. Build Images
 ```
@@ -78,5 +79,6 @@ Looking at the second run command, we are specifying two variables -- the first 
 ```
 python3 faces_subscribe.py
 ```
+No options are needed (but they could be added in the future to increase portability, etc.)
 
 ![Image_Example](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/Faces/face-00.png)
