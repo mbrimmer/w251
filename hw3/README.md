@@ -47,7 +47,7 @@ Credit Note: much of the code above and structure was based on office hours from
 1. Create Virtual server
 We set this up in week 1/2 and are leveraging it for this assignment.
 ```
-ibmcloud sl vs create ...
+ibmcloud sl vs create <...options>
 ```
 Then ensure that we are using public/private keys and passwords are turned off
 
@@ -58,13 +58,25 @@ My bucket name: **mbrimmer-faces-bucket**
 3. Install Docker CE using Lab2 instructions
 
 4. Install IBM Cloud Storage on VI
-5. Add Cloud Storage
-6. build images
+
+
+5. Mount Cloud Storage
+s3fs mb-faces-bucket /mnt/mybucket -o passwd_file=$HOME/.cos_creds -o sigv2 -o use_path_request_style -o url=https://s3.us-south.objectstorage.softlayer.net
+
+6. Build Images
 ```
 docker build --network=host -t ubuntu_cloud -f DockerFile_ubuntu_cloud .
 docker build --network=host -t alpine_cloud -f DockerFile_alpine_cloud .
 ```
-
+7. Run Containers
 ```
 docker run --name mosquitto -p 1883:1883 -d alpine_cloud mosquitto
-docker run --name subscriber -v "$PWD":/HW03 -ti cloud_ubuntu bash
+docker run --name subscriber -v "/root/w251/hw3/":/HW03 -v "/mnt/mybucket":/OUTPUT_DIR -ti cloud_ubuntu bash
+```
+Looking at the second run command, we are specifying two variables -- the first one is to let the user navigate to the source code (below). The other is the mount point mounted above (mybucket).
+
+```
+python3 faces_subscribe.py
+```
+
+![Image_Example](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/Faces/face-13.png)
