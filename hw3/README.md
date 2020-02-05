@@ -95,6 +95,8 @@ s3fs mb-faces-bucket /mnt/mybucket -o passwd_file=$HOME/.cos_creds -o sigv2 -o u
 ```
 
 6. Build Images
+We build an Ubuntu image to host the python / s3fs functionality and a stripped-down Alpine image to act as a broker and communicate with the mosquitto public board.
+
 ```
 docker build --network=host -t ubuntu_cloud -f DockerFile_ubuntu_cloud .
 docker build --network=host -t alpine_cloud -f DockerFile_alpine_cloud .
@@ -105,11 +107,15 @@ docker build --network=host -t alpine_cloud -f DockerFile_alpine_cloud .
 docker run --name mosquitto -p 1883:1883 -d alpine_cloud mosquitto
 docker run --name subscriber -v "/root/w251/hw3/":/HW03 -v "/mnt/mybucket":/OUTPUT_DIR -ti cloud_ubuntu bash
 ```
+Running the containers -- the first to be the mqtt broker and the second to do our processing.
 Looking at the second run command, we are specifying two variables -- the first one is to let the user navigate to the source code (below). The other is the mount point mounted above (mybucket).
 
+Note that to run the following script you'll have to navigage to the appropriate directory in /HW03/
 ```
 python3 faces_subscribe.py
 ```
 No options are needed (but they could be added in the future to increase portability, etc.)
+
+SHOCKINGLY! One may get to see an image come across the wire if all goes well :)
 
 ![Image_Example](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/Faces/face-00.png)
