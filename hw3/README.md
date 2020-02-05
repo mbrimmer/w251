@@ -1,7 +1,5 @@
 # Homework 3: Face Detection, Cropping, and Storage in Cloud
-The objective of this is to build a lightweight IoT application pipeline with components running both on the edge (Nvidia Jetson TX2) and the cloud (a VM in Softlayer).
-
-The overall goal of the assignment is to be able to capture faces in a video stream coming from the edge in real time, transmit them to the cloud in real time, and - for now, just save these faces in the cloud for long term storage.
+We are building a lightweight IoT application pipeline with components running both on the edge (Nvidia Jetson TX2) and the cloud (a VM in Softlayer). The goal is to be able to capture faces in a video stream coming from the edge in real time, transmit them to the cloud in real time, and - for now, just save these faces in the cloud for long term storage.
 
 ![Structure](https://raw.githubusercontent.com/mbrimmer/w251/master/hw3/StructureHW03.png)
 
@@ -49,15 +47,17 @@ We set this up in week 1/2 and are leveraging it for this assignment.
 ```
 ibmcloud sl vs create <...options>
 ```
-Then ensure that we are using public/private keys and passwords are turned off
+Then ensure that we are using public/private keying and passwords are turned off
 
 2. Create Cloud Object Storage
-Do this on the IBM cloud's web interface. <p>
-My bucket name: **mbrimmer-faces-bucket**
+Set up on IBM cloud's web interface. <p>
+My personal bucket name for this project: **mbrimmer-faces-bucket**
 
 3. Install Docker CE and get IBM cloud storage using Lab2 instructions
 See lab 2 for instructions. We should have a usable cloud storage location, s3fs to use in next step
+```
 
+```
 
 5. Mount Cloud Storage
 ```
