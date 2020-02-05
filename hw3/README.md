@@ -54,12 +54,42 @@ Set up on IBM cloud's web interface. <p>
 My personal bucket name for this project: **mbrimmer-faces-bucket**
 
 3. Install Docker CE and get IBM cloud storage using Lab2 instructions
-See lab 2 for instructions. We should have a usable cloud storage location, s3fs to use in next step
+```
+apt-get update
+apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+    
+# add the docker repo    
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+ 
+# install it
+apt-get update
+apt-get install docker-ce
 ```
 
+We should have a usable cloud storage location, s3fs to use in next step
+
+5. Install s3fs and Mount Cloud Storage
+```
+sudo apt-get update
+sudo apt-get install automake autotools-dev g++ git libcurl4-openssl-dev libfuse-dev libssl-dev libxml2-dev make pkg-config
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+```
+```
+cd s3fs-fuse
+./autogen.sh
+./configure
+make
+sudo make install
 ```
 
-5. Mount Cloud Storage
 ```
 s3fs mb-faces-bucket /mnt/mybucket -o passwd_file=$HOME/.cos_creds -o sigv2 -o use_path_request_style -o url=https://s3.us-south.objectstorage.softlayer.net
 ```
@@ -69,6 +99,7 @@ s3fs mb-faces-bucket /mnt/mybucket -o passwd_file=$HOME/.cos_creds -o sigv2 -o u
 docker build --network=host -t ubuntu_cloud -f DockerFile_ubuntu_cloud .
 docker build --network=host -t alpine_cloud -f DockerFile_alpine_cloud .
 ```
+
 7. Run Containers
 ```
 docker run --name mosquitto -p 1883:1883 -d alpine_cloud mosquitto
