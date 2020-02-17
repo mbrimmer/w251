@@ -183,12 +183,15 @@ while(True):
 
         y_high_range = math.ceil(frame.shape[0] * y_max)
         y_low_range = math.floor(frame.shape[0] * y_min)
+        y_height = y_high_range-y_low_range
         x_high_range = math.ceil(frame.shape[1] * x_max)
         x_low_range = math.floor(frame.shape[1] * x_min)
+        x_width = x_high_range - x_low_range
 
-        crop_faces = frame[ ( y_low_range:(y_high_range-y_low_range),
-                            (x_low_range:(x_high_range - x_low_range)),
+        crop_faces = frame[ y_low_range:y_low_range+y_height,
+                            x_low_range:x_low_range+x_width,
                             :]
+
         # frame[y:y+h,x:x+w]
         cv.imshow("crop", crop_faces)
         # Publish coordinates (debug)
