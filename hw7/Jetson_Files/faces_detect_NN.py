@@ -79,12 +79,14 @@ tf_num_detections = tf_sess.graph.get_tensor_by_name('num_detections:0')
 
 image = Image.open(IMAGE_PATH)
 
+print('************************** IMAGE **************')
 plt.imshow(image)
+print('************************** IMAGE **************')
 
 image_resized = np.array(image.resize((300, 300)))
 image = np.array(image)
 
-time.sleep(5)
+time.sleep(15)
 
 scores, boxes, classes, num_detections = tf_sess.run([tf_scores, tf_boxes, tf_classes, tf_num_detections], feed_dict={
     tf_input: image_resized[None, ...]
