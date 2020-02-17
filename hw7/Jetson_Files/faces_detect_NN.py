@@ -160,12 +160,12 @@ while(True):
 
     # gray here is the gray frame from camera
     # gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    # faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
 
     DETECTION_THRESHOLD = 0.5
     # Display image, faces, and publish message
-    img = cv.imshow('frame', frame)
+    # img = cv.imshow('crop', frame)
     #img = cv.imshow('frame', gray)
     for i in range(int(num_detections)):
         if scores[i] < DETECTION_THRESHOLD:
