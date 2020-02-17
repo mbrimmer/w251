@@ -13,7 +13,7 @@ import sys
 
 DEBUG=True
 
-""""""""EVENTUALLY PULL THIS INTO Dockerfile"""""""""""
+#""""""""EVENTUALLY PULL THIS INTO Dockerfile"""""""""""
 # https://github.com/yeephycho/tensorflow-face-detection
 FROZEN_GRAPH_NAME = 'data/frozen_inference_graph_face.pb'
 !wget https://github.com/yeephycho/tensorflow-face-detection/blob/master/model/frozen_inference_graph_face.pb?raw=true -O {FROZEN_GRAPH_NAME}
