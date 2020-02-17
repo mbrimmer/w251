@@ -9,6 +9,7 @@ import numpy as np
 import cv2 as cv
 import time
 import sys
+import math
 
 
 DEBUG=True
@@ -149,7 +150,7 @@ while(True):
     ret, frame = cap.read()
 
 #    image_resized = np.array(frame.resize((300, 300)))
-    print("frame shape", frame.shape)
+
     #print('image_resized shape', image_resized.shape)
     img1 = cv.imshow('frame', frame)
 
@@ -163,26 +164,33 @@ while(True):
     classes = classes[0]
     num_detections = num_detections[0]
 
-    # gray here is the gray frame from camera
-    # gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    # faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-
     DETECTION_THRESHOLD = 0.5
-    # Display image, faces, and publish message
-    # img = cv.imshow('crop', frame)
-    #img = cv.imshow('frame', gray)
+
     for i in range(int(num_detections)):
         if scores[i] < DETECTION_THRESHOLD:
             continue
 
+        y_min = boxes[i][0]
+        y_max = boxes[i][2]
+        x_min = boxes[i][1]
+        x_max = boxes[i][3]
+
         if DEBUG:
-            print(f"Image: y_min={boxes[i][0]}, y_max={boxes[i][2]}, x_min={boxes[i][1]}, x_max={boxes[i][3]}")
+            print(f"Image: y_min={y_min}, y_max={y_max}, x_min={x_min}, x_max={x_max}")
+
         # scale box to image coordinates
         # box = boxes[i] * np.array([image.shape[0], image.shape[1], image.shape[0], image.shape[1]])
 
-        # crop_faces = gray[y:y+h,x:x+w]
-        # cv.imshow("crop", crop_faces)
+        y_high_range = math.ceil(frame.shape[0] * y_max)
+        y_low_range = math.floor(frame.shape[0] * y_min)
+        x_high_range = math.ceil(frame.shape[1] * x_max)
+        x_low_range = math.floor(frame.shape[1] * x_min)
+
+        crop_faces = frame[ ( y_low_range:(y_high_range-y_low_range),
+                            (x_low_range:(x_high_range - x_low_range)),
+                            :]
+        # frame[y:y+h,x:x+w]
+        cv.imshow("crop", crop_faces)
         # Publish coordinates (debug)
         # coord_payload = str(img_num)+ ':' + ' (' + str(x) + "," + str(y) + ')'
 
