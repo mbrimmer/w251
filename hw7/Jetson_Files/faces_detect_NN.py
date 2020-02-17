@@ -21,7 +21,6 @@ import os
 import urllib
 import tensorflow.contrib.tensorrt as trt
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import tensorflow as tf
