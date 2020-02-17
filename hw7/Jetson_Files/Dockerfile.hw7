@@ -1,7 +1,7 @@
 # This builds the docker image
 # docker build -t hw7_img -f Dockerfile.hw7 .
 # OLD # docker run --privileged --rm -p 8888:8888 -d hw7_img
-# docker run --privileged --rm -p 8888:8888 -it hw7_img bash
+# docker run --privileged --rm -p 8888:8888 -v "$PWD":/HW07 -it hw7_img bash
 
 
 FROM w251/keras:dev-tx2-4.3_b132-tf1
