@@ -15,7 +15,19 @@ DEBUG=True
 
 #""""""""EVENTUALLY PULL THIS INTO Dockerfile"""""""""""
 # https://github.com/yeephycho/tensorflow-face-detection
-
+from PIL import Image
+import sys
+import os
+import urllib
+import tensorflow.contrib.tensorrt as trt
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import tensorflow as tf
+import numpy as np
+import time
+from tf_trt_models.detection import download_detection_model, build_detection_graph
 
 FROZEN_GRAPH_NAME='data/frozen_inference_graph_face.pb'
 IMAGE_PATH='data/warriors.jpg'
