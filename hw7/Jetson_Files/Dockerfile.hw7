@@ -31,3 +31,5 @@ WORKDIR /notebooks
 RUN git clone --recursive https://github.com/NVIDIA-Jetson/tf_trt_models.git
 WORKDIR tf_trt_models
 RUN ./install.sh python3
+
+RUN apt install python3-opencv
