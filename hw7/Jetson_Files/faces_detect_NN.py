@@ -149,6 +149,9 @@ while(True):
     ret, frame = cap.read()
 
     image_resized = np.array(frame.resize((300, 300)))
+    print("frame shape", frame.shape)
+    print('image_resized shape', image_resized.shape)
+    img1 = cv.imshow('frame', frame)
 
     scores, boxes, classes, num_detections = tf_sess.run([tf_scores, tf_boxes, tf_classes, tf_num_detections],
         feed_dict={
