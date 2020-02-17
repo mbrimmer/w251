@@ -1,6 +1,6 @@
-# This builds the tensorrt lab file docker file 
-# docker build -t tensorrtlab05 -f Dockerfile.tensorrtlab05 .
-# docker run --privileged --rm -p 8888:8888 -d tensorrtlab05
+# This builds the docker image
+# docker build -t hw7_img -f Dockerfile.hw7 .
+# docker run --privileged --rm -p 8888:8888 -d hw7_img
 
 FROM w251/keras:dev-tx2-4.3_b132-tf1
 
@@ -15,7 +15,7 @@ RUN mkdir /protobuf
 WORKDIR /protobuf
 RUN git clone -b '3.6.x' https://github.com/google/protobuf.git . && \
     ./autogen.sh && \
-    ./configure --prefix=/usr/local 
+    ./configure --prefix=/usr/local
 
 RUN make -j6 && make install
 RUN ldconfig
