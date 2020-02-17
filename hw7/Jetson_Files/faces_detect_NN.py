@@ -81,6 +81,7 @@ image = Image.open(IMAGE_PATH)
 
 print('************************** IMAGE **************')
 plt.imshow(image)
+plt.show()
 print('************************** IMAGE **************')
 
 image_resized = np.array(image.resize((300, 300)))
@@ -104,6 +105,7 @@ fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 
 ax.imshow(image)
+plt.show()
 
 # plot boxes exceeding score threshold
 for i in range(int(num_detections)):
