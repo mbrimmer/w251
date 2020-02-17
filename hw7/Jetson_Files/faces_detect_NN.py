@@ -158,6 +158,11 @@ while(True):
             tf_input: frame[None, ...]
             })
 
+    boxes = boxes[0] # index by 0 to remove batch dimension
+    scores = scores[0]
+    classes = classes[0]
+    num_detections = num_detections[0]
+
     # gray here is the gray frame from camera
     # gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     # faces = face_cascade.detectMultiScale(gray, 1.3, 5)
