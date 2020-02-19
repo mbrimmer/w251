@@ -30,3 +30,13 @@ The above code instantiates a containers with keras, TF, OpenCV. We enter it wit
 ```
 
 This script will pull down a model from the web to be used in the .py file.
+
+## Questions
+Describe your solution in detail. What neural network did you use? What dataset was it trained on? What accuracy does it achieve?
+> 
+Does it achieve reasonable accuracy in your empirical tests? Would you use this solution to develop a robust, production-grade system?
+> It actually does pretty well. I wasn't giving the camera much variety aside from me in my computer chair, but it was capturing me from many angles that wasn't done from the OpenCV solution.
+What framerate does this method achieve on the Jetson? Where is the bottleneck?
+> TBD
+Which is a better quality detector: the OpenCV or yours?
+> Mine. It was capturing 
