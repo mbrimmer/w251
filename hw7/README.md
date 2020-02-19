@@ -29,14 +29,17 @@ The above code instantiates a containers with keras, TF, OpenCV. We enter it wit
 ./Run_Face_Detection.sh
 ```
 
-This script will pull down a model from the web to be used in the .py file.
+This script will pull down a model from the web to be used in the .py file and then run the .py file.
 
 ## Questions
 Describe your solution in detail. What neural network did you use? What dataset was it trained on? What accuracy does it achieve?
-> 
+> Solution is a mobilenet SSD(single shot multibox detector) based face detector with pretrained model provided, powered by tensorflow object detection api, trained by WIDERFACE dataset. I'm not sure the accuracy it achieves on labeled data, but it did very well with my face.<br>
+
 Does it achieve reasonable accuracy in your empirical tests? Would you use this solution to develop a robust, production-grade system?
-> It actually does pretty well. I wasn't giving the camera much variety aside from me in my computer chair, but it was capturing me from many angles that wasn't done from the OpenCV solution.
+> It actually does pretty well. I wasn't giving the camera much variety aside from me in my computer chair, but it was capturing me from many angles that wasn't done from the OpenCV solution. I would probably not use it in a robust, production-grade system without knowing much more about it and doing some exhasutive testing, but it worked well for my purposes.
+
 What framerate does this method achieve on the Jetson? Where is the bottleneck?
-> TBD
+> 60fps. The bottleneck is probably with the processing / detection within the neural net.
+
 Which is a better quality detector: the OpenCV or yours?
-> Mine. It was capturing 
+> Mine. It was capturing more images of me from various angles that OpenCv would never have captured and doing it at the needed speeds.
