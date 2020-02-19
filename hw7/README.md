@@ -10,25 +10,23 @@ detect the face instead of opencv. The rest could be the same.
 
 docker build commands - for jetson with Tensorflow, keras, opencv, etc.
 ```
-docker build
-TBD
+docker build -t hw7_img -f Dockerfile.hw7 .
 ```
-To
 
-# Create an alpine linux - based message forwarder container:
-docker run --name forwarder --network hw03 -v "$PWD"/..:/HW03 -d mosquitto_jtx2 sh -c "mosquitto -c /HW03/Jetson_Files/mqtt_forwarder_config.conf"
+2. Create container
+In order to instantiate the image we run the following from the /Jetson_files/ directory
 ```
-The above code instantiates two containers. One to act as a broker and the other to act as a forwarder. The configuration files specify where the message will be routed. Right now, they are being routed from the broker to the forwarder and then to test.mosquitto.org.
+./DockerFace_hw7.sh
+```
+
+The code it is running is the following: docker run --privileged --rm -p 8888:8888 -v "$PWD":/HW07 -it hw7_img bash
+
+The above code instantiates a containers with keras, TF, OpenCV. We enter it with the bash command and navigate to /HW07/
 
 3. Run image capture code
+<from within container /HW07/>
 ```
-<from within /Jetson_Files>
-./DockerFace
-cd /HW03/Jetson_Files
-python3 faces_detect.py mosquitto
+./Run_Face_Detection.sh
 ```
-The above sets up an instance of the ubuntu_jtx2 image and leaves us at a bash shell where we can navigate to the Jetson_Files directory and kick off the python script that uses openCV to identify faces and commence the message passing.
 
-Goal: At this point, screen shots are being made, cropped to just the face, and the face is being sent from the jetson ubuntu container, to a broker alpine container, to a forwarder alpine container, and to the public test.mosquitto.org server.
-
-Credit Note: much of the code above and structure was based on office hours from Vinicio De Sola.
+This script will pull down a model from the web to be used in the .py file.
